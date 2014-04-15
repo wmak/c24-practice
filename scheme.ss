@@ -85,8 +85,9 @@
 	(if (empty? L)
 		accum
 		(if (list? (first L))
-			(append accum (helper accum (first L))) 
-			(helper (cons accum (list (first L))) (rest L))
+			(append (append accum (helper accum (first L))) 
+					(helper accum (rest L)))
+			(helper (append accum (list (first L))) (rest L))
 		)
 	)
 )
