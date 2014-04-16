@@ -58,3 +58,18 @@ fun numNodes (Node(_, [])) = 1
 numNodes : 'a NonEmptyTree -> int;
 
 numNodes(tree);
+
+fun height (Node(_, [])) = 0
+  | height (Node(_, [a])) = 1 + height(a)
+  | height (Node(x, (a::b))) = (fn (x, y) => if x>y then x else y) (height(a),
+  height(Node(x, b)));
+
+height : 'a NonEmptyTree -> int;
+
+height(tree);
+
+fun tmap f (Node(x, [])) = (Node((f x), []))
+  | tmap f (Node(x, [a])) = (Node((f x),tmap f a))
+  | tmap f (Node(x, (a::b))) = (Node((f x), (tmap f a) :: (tmap f (Node(x,b)))));
+
+height : ('a -> 'b) -> 'a NonEmptyTree -> 'b NonEmptyTree;
