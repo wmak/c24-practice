@@ -18,7 +18,14 @@ three l = foldr (\x y -> x + y) 0 l
 three :: [Int] -> Int
 
 {- Use apply -}
-{- Not applicable in Haskell -}
+{- four Not applicable in Haskell -}
+
+{-  Write a procedure (filter f l) that returns a list of elements of l that
+ -  satisfy f -}
+five f l = foldr (\x y -> if (f x) then [x] ++ y else y) [] l
+five :: (a -> Bool) -> [a] -> [a]
+
+{- The rest of the questions cannot be done with haskell -}
 
 {- Deﬁne a function double which returns [2*a0, 2*a1, 2*a2, ...] when called
  - with an input list
