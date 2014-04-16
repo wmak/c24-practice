@@ -36,3 +36,25 @@ fun five f l = foldr (fn (la, v) => if (f la) then la::v else v) [] l;
 five: ('Z -> bool) -> 'Z list -> 'Z list;
 
 five (fn x => x = 0) [1,2,3,0];
+
+(*Trees!*)
+datatype 'a NonEmptyTree = Node of 'a * ('a NonEmptyTree list);
+
+fun numLeaves (Node(_, [])) = 1
+  | numLeaves (Node(_, [a])) = numLeaves(a)
+  | numLeaves (Node(x, (a::b))) = numLeaves(a) + numLeaves(Node(x, b));
+
+numLeaves : 'a NonEmptyTree -> int;
+
+val tree = (Node(1, [(Node(1,[])), (Node(2,[])), (Node(3,[(Node(1,[])),
+(Node(2,[]))]))]));
+
+numLeaves(tree);
+
+fun numNodes (Node(_, [])) = 1
+  | numNodes (Node(_, [a])) = 1 + numNodes(a)
+  | numNodes (Node(x, (a::b))) = numNodes(a) + numNodes(Node(x, b));
+
+numNodes : 'a NonEmptyTree -> int;
+
+numNodes(tree);
